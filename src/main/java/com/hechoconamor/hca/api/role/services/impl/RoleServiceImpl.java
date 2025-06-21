@@ -1,8 +1,8 @@
-package com.hechoconamor.hca.api.services.impl;
+package com.hechoconamor.hca.api.role.services.impl;
 
-import com.hechoconamor.hca.api.models.Role;
-import com.hechoconamor.hca.api.repositories.RoleRepository;
-import com.hechoconamor.hca.api.services.RoleService;
+import com.hechoconamor.hca.api.role.entity.Role;
+import com.hechoconamor.hca.api.role.repository.RoleRepository;
+import com.hechoconamor.hca.api.role.services.RoleService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,9 +43,9 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Optional<Role> updateRole(Integer id, Role role) {
         return roleRepository.findById(id)
-                .map(roleExistente -> {
-                    roleExistente.setName(role.getName());
-                    return roleRepository.save(roleExistente);
+                .map(existingRole -> {
+                    existingRole.setName(role.getName());
+                    return roleRepository.save(existingRole);
                 });
         // Si el repositorio no encuentra el role, .map no se ejecuta y devuelve Optional.empty()
     }

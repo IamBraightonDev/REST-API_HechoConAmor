@@ -1,10 +1,12 @@
-package com.hechoconamor.hca.api.models;
+package com.hechoconamor.hca.api.user.entity;
 
+import com.hechoconamor.hca.api.role.entity.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -35,6 +37,7 @@ public class User {
     private Role role;
 
     @Column(name = "registration_date")
+    @CreationTimestamp
     private LocalDateTime registrationDate = LocalDateTime.now();
 
 }

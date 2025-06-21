@@ -1,6 +1,6 @@
-package com.hechoconamor.hca.api.repositories;
+package com.hechoconamor.hca.api.role.repository;
 
-import com.hechoconamor.hca.api.models.Role;
+import com.hechoconamor.hca.api.role.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
-package com.hechoconamor.hca.api.services;
+package com.hechoconamor.hca.api.role.services;
 
-import com.hechoconamor.hca.api.models.Role;
+import com.hechoconamor.hca.api.role.entity.Role;
 
 import java.util.List;
 import java.util.Optional;

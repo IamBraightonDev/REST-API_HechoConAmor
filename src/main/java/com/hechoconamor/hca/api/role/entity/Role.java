@@ -1,6 +1,7 @@
-package com.hechoconamor.hca.api.models;
+package com.hechoconamor.hca.api.role.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hechoconamor.hca.api.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

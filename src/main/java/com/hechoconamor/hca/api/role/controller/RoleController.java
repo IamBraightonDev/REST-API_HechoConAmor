@@ -1,8 +1,8 @@
-package com.hechoconamor.hca.api.controllers;
+package com.hechoconamor.hca.api.role.controller;
 
-import com.hechoconamor.hca.api.models.Role;
-import com.hechoconamor.hca.api.models.User;
-import com.hechoconamor.hca.api.services.RoleService;
+import com.hechoconamor.hca.api.role.entity.Role;
+import com.hechoconamor.hca.api.user.entity.User;
+import com.hechoconamor.hca.api.role.services.RoleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

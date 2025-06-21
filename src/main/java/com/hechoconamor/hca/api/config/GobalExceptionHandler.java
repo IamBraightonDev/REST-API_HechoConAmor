@@ -1,4 +1,4 @@
-package com.hechoconamor.hca.api.controllers;
+package com.hechoconamor.hca.api.config;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.hechoconamor.hca.api.controllers;
+package com.hechoconamor.hca.api.user.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
