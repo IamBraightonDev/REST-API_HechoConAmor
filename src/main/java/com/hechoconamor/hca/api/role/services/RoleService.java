@@ -1,22 +1,22 @@
 package com.hechoconamor.hca.api.role.services;
 
-import com.hechoconamor.hca.api.role.entity.Role;
+import com.hechoconamor.hca.api.role.dtos.RoleRequestDTO;
+import com.hechoconamor.hca.api.role.dtos.RoleResponseDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface RoleService {
 
-    Role registerRole(Role role);
+    RoleResponseDTO registerRole(RoleRequestDTO roleDto);
 
-    List<Role> findAllRoles();
+    List<RoleResponseDTO> findAllRoles();
 
-    Optional<Role> findById(Integer id);
+    RoleResponseDTO findById(Integer id);
 
-    Optional<Role> findByNameIgnoreCase(String name);
+    RoleResponseDTO findByNameIgnoreCase(String name);
 
-    Optional<Role> updateRole(Integer id, Role role);
+    RoleResponseDTO updateRole(Integer id, RoleRequestDTO role);
 
-    boolean deleteRole(Integer id);
+    void deleteRole(Integer id);
 
 }

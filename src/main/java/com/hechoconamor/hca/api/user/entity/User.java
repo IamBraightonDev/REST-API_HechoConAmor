@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "role")
 @Entity
 @Table(name = "users")
 public class User {
@@ -32,12 +32,12 @@ public class User {
     @Column(name = "password", nullable = false, length = 100)
     private String password;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", nullable = false) // Nombre del FK de la tabla roles
     private Role role;
 
-    @Column(name = "registration_date")
+    @Column(name = "registration_date", updatable = false)
     @CreationTimestamp
-    private LocalDateTime registrationDate = LocalDateTime.now();
+    private LocalDateTime registrationDate;
 
 }

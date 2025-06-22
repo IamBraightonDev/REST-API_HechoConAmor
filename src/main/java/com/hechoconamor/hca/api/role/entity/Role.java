@@ -1,14 +1,10 @@
 package com.hechoconamor.hca.api.role.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.hechoconamor.hca.api.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,9 +21,5 @@ public class Role {
 
     @Column(name = "name", unique = true, nullable = false, length = 50)
     private String name;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "role") // Nombre del atributo en User
-    private List<User> userList;
 
 }

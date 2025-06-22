@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findByRole(Integer idRole) {
-        return userRepository.findByRole(idRole);
+        return userRepository.findByRoleId(idRole);
     }
 
     @Override

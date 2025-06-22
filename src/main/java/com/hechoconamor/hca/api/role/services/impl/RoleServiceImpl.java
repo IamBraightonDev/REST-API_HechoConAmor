@@ -1,62 +1,83 @@
 package com.hechoconamor.hca.api.role.services.impl;
 
+import com.hechoconamor.hca.api.role.dtos.RoleRequestDTO;
+import com.hechoconamor.hca.api.role.dtos.RoleResponseDTO;
 import com.hechoconamor.hca.api.role.entity.Role;
 import com.hechoconamor.hca.api.role.repository.RoleRepository;
 import com.hechoconamor.hca.api.role.services.RoleService;
+import com.hechoconamor.hca.api.role.validator.RoleValidator;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;
+    private final RoleValidator roleValidator;
+    private final ModelMapper modelMapper;
 
-    public RoleServiceImpl(RoleRepository roleRepository) {
+    public RoleServiceImpl(RoleRepository roleRepository,
+                           RoleValidator roleValidator,
+                           ModelMapper modelMapper) {
         this.roleRepository = roleRepository;
+        this.roleValidator = roleValidator;
+        this.modelMapper = modelMapper;
     }
 
     @Override
-    public Role registerRole(Role role) {
-        if (roleRepository.findByNameIgnoreCase(role.getName()).isPresent()) {      // Validar si el nombre ya existe
-            throw new IllegalArgumentException("El nombre de este rol ya existe");
-        }
-        return roleRepository.save(role);
+    public RoleResponseDTO registerRole(RoleRequestDTO requestDto) {
+        roleValidator.validateBeforeRegister(requestDto);
+
+        Role newRole = modelMapper.map(requestDto, Role.class);
+        Role savedRole = roleRepository.save(newRole);
+
+        return modelMapper.map(savedRole, RoleResponseDTO.class);
     }
 
     @Override
-    public List<Role> findAllRoles() {
-        return roleRepository.findAll();
+    public List<RoleResponseDTO> findAllRoles() {
+        return roleRepository.findAll()
+                .stream()
+                .map(role -> modelMapper.map(role, RoleResponseDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<Role> findById(Integer id) {
-        return roleRepository.findById(id);
+    public RoleResponseDTO findById(Integer id) {
+        Role role = roleRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Rol no encontrado con ID: " + id));
+
+        return modelMapper.map(role, RoleResponseDTO.class);
     }
 
     @Override
-    public Optional<Role> findByNameIgnoreCase(String name) {
-        return roleRepository.findByNameIgnoreCase(name);
+    public RoleResponseDTO findByNameIgnoreCase(String name) {
+        Role role = roleRepository.findByNameIgnoreCase(name)
+                .orElseThrow(() -> new NoSuchElementException("Rol no encontrado con nombre: " + name));
+
+        return modelMapper.map(role, RoleResponseDTO.class);
     }
 
     @Override
-    public Optional<Role> updateRole(Integer id, Role role) {
-        return roleRepository.findById(id)
-                .map(existingRole -> {
-                    existingRole.setName(role.getName());
-                    return roleRepository.save(existingRole);
-                });
-        // Si el repositorio no encuentra el role, .map no se ejecuta y devuelve Optional.empty()
+    public RoleResponseDTO updateRole(Integer id, RoleRequestDTO requestDto) {
+        Role existingRole = roleRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Rol no encontrado con ID: " + id));
+
+        roleValidator.validateBeforeUpdate(id, requestDto);
+        existingRole.setName(requestDto.getName());
+        Role updatedRol = roleRepository.save(existingRole);
+
+        return modelMapper.map(updatedRol, RoleResponseDTO.class);
     }
 
     @Override
-    public boolean deleteRole(Integer id) {
-        return roleRepository.findById(id)
-                .map(rol -> {
-                    roleRepository.deleteById(id);
-                    return true;
-                })
-                .orElse(false);
+    public void deleteRole(Integer id) {
+        Role existingRole = roleRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Rol no encontrado con ID: " + id));
+        roleRepository.delete(existingRole);
     }
 }

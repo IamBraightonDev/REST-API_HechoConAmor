@@ -1,4 +1,4 @@
-package com.hechoconamor.hca.api.user.dto;
+package com.hechoconamor.hca.api.user.dtos;
 
 import com.hechoconamor.hca.api.role.entity.Role;
 import lombok.AllArgsConstructor;

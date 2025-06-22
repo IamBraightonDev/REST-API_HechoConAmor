@@ -15,7 +15,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     Optional<User> findByEmailIgnoreCase(String email);
 
-    List<User> findByRole(Integer idRole);
+    List<User> findByRoleId(Integer roleId);
 
     @Query("SELECT u FROM User u WHERE DATE(u.registrationDate) = :date")
     List<User> findByRegistrationDate(@Param("date") LocalDate date);

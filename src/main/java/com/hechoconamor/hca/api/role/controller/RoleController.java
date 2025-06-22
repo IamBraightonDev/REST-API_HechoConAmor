@@ -1,8 +1,9 @@
 package com.hechoconamor.hca.api.role.controller;
 
-import com.hechoconamor.hca.api.role.entity.Role;
-import com.hechoconamor.hca.api.user.entity.User;
+import com.hechoconamor.hca.api.role.dtos.RoleRequestDTO;
+import com.hechoconamor.hca.api.role.dtos.RoleResponseDTO;
 import com.hechoconamor.hca.api.role.services.RoleService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,49 +21,38 @@ public class RoleController {
     }
 
     @PostMapping
-    public ResponseEntity<Role> registerRole(@RequestBody Role role) {
-        Role nuevoRole = roleService.registerRole(role);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoRole);
+    public ResponseEntity<RoleResponseDTO> registerRole(@Valid @RequestBody RoleRequestDTO requestDto) {
+        RoleResponseDTO savedRole = roleService.registerRole(requestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedRole); // 201 Created
     }
 
     @GetMapping
-    public ResponseEntity<List<Role>> finAllRoles() {
-        List<Role> listaRoles = roleService.findAllRoles();
-        return ResponseEntity.ok(listaRoles);
+    public ResponseEntity<List<RoleResponseDTO>> finAllRoles() {
+        return ResponseEntity.ok(roleService.findAllRoles()); // 200 OK
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<Role> findById(@PathVariable Integer id) {
-        return roleService.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<RoleResponseDTO> findById(@PathVariable Integer id) {
+        RoleResponseDTO foundRole = roleService.findById(id);
+        return ResponseEntity.ok(foundRole); // 200 OK
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<Role> findByName(@PathVariable String nombre) {
-        return roleService.findByNameIgnoreCase(nombre)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-    @RequestMapping("{name}/users")
-    public ResponseEntity<List<User>> findUsersByRoleName(@PathVariable String name) {
-        return roleService.findByNameIgnoreCase(name)
-                .map(role -> ResponseEntity.ok(role.getUserList()))
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<RoleResponseDTO> findByName(@PathVariable String name) {
+        RoleResponseDTO foundRole = roleService.findByNameIgnoreCase(name);
+        return ResponseEntity.ok(foundRole);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Role> updateRole(@PathVariable Integer id, @RequestBody Role role) {
-        return roleService.updateRole(id, role)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<RoleResponseDTO> updateRole(@PathVariable Integer id,
+                                                      @Valid @RequestBody RoleRequestDTO requestDto) {
+        RoleResponseDTO updatedRole = roleService.updateRole(id, requestDto);
+        return ResponseEntity.ok(updatedRole); // 200 OK
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Role> deleteRole(@PathVariable Integer id) {
-        boolean deletedRole = roleService.deleteRole(id);
-        return deletedRole ? ResponseEntity.noContent().build()  // 204 No Content
-                            : ResponseEntity.notFound().build(); // 404 Not Found
+    public ResponseEntity<RoleResponseDTO> deleteRole(@PathVariable Integer id) {
+        roleService.deleteRole(id);
+        return ResponseEntity.noContent().build(); // 204 No Content
     }
 }
