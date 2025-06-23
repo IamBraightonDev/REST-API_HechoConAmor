@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RoleRequestDTO {
 
-    @NotBlank(message = "El nombre es obligatorio")
+    @NotBlank(message = "El nombre del rol es obligatorio")
     @Size(max = 50, message = "El nombre del rol no puede exceder los 50 caracteres")
     private String name;
 

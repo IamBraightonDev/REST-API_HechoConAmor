@@ -42,7 +42,7 @@ public class RoleServiceImpl implements RoleService {
     public List<RoleResponseDTO> findAllRoles() {
         return roleRepository.findAll()
                 .stream()
-                .map(role -> modelMapper.map(role, RoleResponseDTO.class))
+                .map(roles -> modelMapper.map(roles, RoleResponseDTO.class))
                 .collect(Collectors.toList());
     }
 

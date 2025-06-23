@@ -1,29 +1,29 @@
 package com.hechoconamor.hcaapi.user.services;
 
-import com.hechoconamor.hcaapi.user.entity.User;
+import com.hechoconamor.hcaapi.user.dtos.UserRequestDTO;
+import com.hechoconamor.hcaapi.user.dtos.UserResponseDTO;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
 
-    User registerUser(User user);
+    UserResponseDTO registerUser(UserRequestDTO userDto);
 
-    List<User> findAllUsers();
+    List<UserResponseDTO> findAllUsers();
 
-    Optional<User> findById(Integer id);
+    UserResponseDTO findById(Integer id);
 
-    Optional<User> findByName(String name);
+    UserResponseDTO findByName(String name);
 
-    Optional<User> findByEmail(String email);
+    UserResponseDTO findByEmail(String email);
 
-    List<User> findByRole(Integer idRole);
+    List<UserResponseDTO> findByRoleId(Integer roleId);
 
-    List<User> findByRegistrationDate(LocalDate date);
+    List<UserResponseDTO> findByRegistrationDate(LocalDate date);
 
-    Optional<User> updateUser(Integer id, User user);
+    UserResponseDTO updateUser(Integer id, UserRequestDTO userDto);
 
-    boolean deleteUser(Integer id);
+    void deleteUser(Integer id);
 
 }

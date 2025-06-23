@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +18,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     List<User> findByRoleId(Integer roleId);
 
-    @Query("SELECT u FROM User u WHERE DATE(u.registrationDate) = :date")
-    List<User> findByRegistrationDate(@Param("date") LocalDate date);
+    @Query("SELECT u FROM User u WHERE u.registrationDate >= :start AND u.registrationDate < :end")
+    List<User> findByRegistrationDateBetween(@Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 
 }

@@ -43,7 +43,7 @@ public class RoleController {
     @GetMapping("/name/{name}")
     public ResponseEntity<RoleResponseDTO> findByName(@PathVariable String name) {
         RoleResponseDTO foundRole = roleService.findByNameIgnoreCase(name);
-        return ResponseEntity.ok(foundRole);
+        return ResponseEntity.ok(foundRole); // 200 OK
     }
 
 
@@ -58,7 +58,7 @@ public class RoleController {
 
     // ************************ Delete - CRUD ************************ //
     @DeleteMapping("/{id}")
-    public ResponseEntity<RoleResponseDTO> deleteRole(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteRole(@PathVariable Integer id) {
         roleService.deleteRole(id);
         return ResponseEntity.noContent().build(); // 204 No Content
     }
