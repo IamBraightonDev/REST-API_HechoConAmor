@@ -23,7 +23,7 @@ public class UserRequestDTO {
     private String email;
 
     @NotBlank(message = "La contrasena es obligatoria")
-    @Size(max = 100, message = "El nombre de usuario no puede superar los 50 caracteres")
+    @Size(max = 100, message = "El nombre de usuario no puede superar los 100 caracteres")
     private String password;
 
     @NotNull(message = "El ID del rol es obligatorio")

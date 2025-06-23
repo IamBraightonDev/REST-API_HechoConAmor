@@ -1,7 +1,6 @@
-
 # 📌 Módulo: Role (Rol)
 
-Este módulo gestiona los roles dentro de la aplicación API_HechoConAmor. Es responsable de crear, consultar, actualizar y eliminar roles. Toda la lógica de negocio, validación y manejo de errores se encuentra desacoplada del controlador siguiendo buenas prácticas.
+Este módulo gestiona los roles dentro de la aplicación **API_HechoConAmor**. Es responsable de crear, consultar, actualizar y eliminar roles. Toda la lógica de negocio, validación y manejo de errores se encuentra desacoplada del controlador siguiendo buenas prácticas.
 
 ---
 
