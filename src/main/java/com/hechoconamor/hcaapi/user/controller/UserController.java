@@ -1,5 +1,6 @@
 package com.hechoconamor.hcaapi.user.controller;
 
+import com.hechoconamor.hcaapi.shared.exceptions.ForbiddenException;
 import com.hechoconamor.hcaapi.user.dtos.UserRequestDTO;
 import com.hechoconamor.hcaapi.user.dtos.UserResponseDTO;
 import com.hechoconamor.hcaapi.user.services.UserService;
@@ -70,6 +71,19 @@ public class UserController {
                                                       @Valid @RequestBody UserRequestDTO userDto) {
         UserResponseDTO updatedUser = userService.updateUser(id, userDto);
         return ResponseEntity.ok(updatedUser); // 200 OK
+    }
+
+    @PutMapping("/{id}/role")
+    public ResponseEntity<Void> changeUserRole(@PathVariable Integer id,
+                                               @RequestParam Integer newRoleId,
+                                               @RequestParam String currentUserRole) {
+        // Verificación básica sin seguridad real
+        if (!"Admin".equalsIgnoreCase(currentUserRole)) {
+            throw new ForbiddenException("Solo los administradores pueden cambiar el rol de un usuario.");
+        }
+
+        userService.changeUserRole(id, newRoleId);
+        return ResponseEntity.noContent().build();
     }
 
 

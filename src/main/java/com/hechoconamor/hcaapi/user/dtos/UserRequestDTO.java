@@ -2,7 +2,6 @@ package com.hechoconamor.hcaapi.user.dtos;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,8 +24,5 @@ public class UserRequestDTO {
     @NotBlank(message = "La contrasena es obligatoria")
     @Size(max = 100, message = "El nombre de usuario no puede superar los 100 caracteres")
     private String password;
-
-    @NotNull(message = "El ID del rol es obligatorio")
-    private Integer roleId;
 
 }

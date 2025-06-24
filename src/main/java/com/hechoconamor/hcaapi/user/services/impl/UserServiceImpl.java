@@ -10,7 +10,9 @@ import com.hechoconamor.hcaapi.user.services.UserService;
 import com.hechoconamor.hcaapi.user.validator.UserValidator;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -45,12 +47,12 @@ public class UserServiceImpl implements UserService {
         userValidator.validateBeforeRegister(userDto);
 
         // Obtener el rol usando el ID proporcionado en el DTO
-        Role role = roleRepository.findById(userDto.getRoleId())
+        Role defaultRole = roleRepository.findByNameIgnoreCase("Vendedor")
                 .orElseThrow(() -> new NoSuchElementException("Rol no encontrado"));
 
         // Convertir el DTO a una entidad User
         User newUser = modelMapper.map(userDto, User.class);
-        newUser.setRole(role); // Asignar el rol a la entidad User
+        newUser.setRole(defaultRole); // Asignar el rol a la entidad User
         newUser.setId(null); // Forzar que Hibernate lo trate como un nuevo registro
 
         // Guardar el nuevo usuario en la base de datos
@@ -129,18 +131,10 @@ public class UserServiceImpl implements UserService {
         User existingUser = userRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Usuario no encontrado"));
 
-        // Validar que el ID del rol no sea null
-        Integer roleId = Objects.requireNonNull(userDto.getRoleId(), "El rol es obligatorio");
-
-        // Obtener el rol a asignar
-        Role role = roleRepository.findById(roleId)
-                        .orElseThrow(() -> new NoSuchElementException("Rol no encontrado"));
-
         // Actualizar campos del usuario con los nuevos valores del DTO
         existingUser.setName(userDto.getName());
         existingUser.setEmail(userDto.getEmail());
         existingUser.setPassword(userDto.getPassword());
-        existingUser.setRole(role);
 
         // Guardar cambios en la base de datos
         User updatedUser = userRepository.save(existingUser);
@@ -148,6 +142,24 @@ public class UserServiceImpl implements UserService {
         // Retornar el usuario actualizado en forma de DTO
         return modelMapper.map(updatedUser, UserResponseDTO.class);
     }
+
+    @Override
+    public void changeUserRole(Integer userId, Integer newRoleId) {
+        // Buscar el usuario
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NoSuchElementException("Usuario no encontrado"));
+
+        //Buscar el nuevo rol
+        Role newRole = roleRepository.findById(newRoleId)
+                .orElseThrow(() -> new NoSuchElementException("Rol no encontrado"));
+
+        //Asignar el nuevo rol
+        user.setRole(newRole);
+
+        //Guardar cambios
+        userRepository.save(user);
+    }
+
 
     // ********** Eliminar un usuario por su ID ********** //
     @Override

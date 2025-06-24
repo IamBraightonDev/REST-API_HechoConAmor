@@ -24,6 +24,8 @@ public interface UserService {
 
     UserResponseDTO updateUser(Integer id, UserRequestDTO userDto);
 
+    void changeUserRole(Integer userId, Integer newRoleId);
+
     void deleteUser(Integer id);
 
 }
