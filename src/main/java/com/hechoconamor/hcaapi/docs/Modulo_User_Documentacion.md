@@ -59,8 +59,6 @@ private String email;
 @Size(max = 100)
 private String password;
 
-@NotNull(message = "El ID del rol es obligatorio")
-private Integer roleId;
 ```
 
 ### ✔️ UserResponseDTO.java
@@ -80,7 +78,6 @@ private LocalDateTime registrationDate;
 - ✅ **Validación de negocio** en `UserValidator`:
   - El nombre de usuario no puede repetirse (case-insensitive).
   - El correo electrónico debe ser único.
-  - El ID de rol debe ser válido y no nulo.
   - No se permite crear/actualizar con campos vacíos.
 
 ---
@@ -192,12 +189,11 @@ Ubicación: `com.hechoconamor.hcaapi.shared.exception.GlobalExceptionHandler`
 - [x] Controlador REST (`UserController`)
 - [x] Manejo global de excepciones
 - [x] Búsqueda por nombre, email, rol y fecha
+- [x] Agregar documentación automática con Swagger (`springdoc-openapi`).
 
 ---
 
 ## 📝 Próximos pasos
 
 - [ ] Encriptar contraseñas con BCrypt en `UserServiceImpl`.
-- [ ] Agregar documentación automática con Swagger (`springdoc-openapi`).
-- [ ] Crear pruebas unitarias para `UserService` y `UserValidator`.
 - [ ] Implementar filtros o middleware de auditoría/logging si se desea trazabilidad.
