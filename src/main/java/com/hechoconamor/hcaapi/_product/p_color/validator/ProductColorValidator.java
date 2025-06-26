@@ -18,26 +18,26 @@ public class ProductColorValidator {
     public void validateBeforeRegister(ProductColorRequestDTO productColorRequestDTO) {
         // Validar el nombre
         if(productColorRequestDTO.getName() == null || productColorRequestDTO.getName().isBlank()) {
-            throw new BadRequestException("El nombre del p_color no puede estar vacío.");
+            throw new BadRequestException("El nombre del color no puede estar vacío.");
         }
 
-        // Verifica si existe otro p_color con el mismo nombre
+        // Verifica si existe otro color con el mismo nombre
         if(productColorRepository.findByNameIgnoreCase(productColorRequestDTO.getName()).isPresent()) {
-            throw new ConflictException("El nombre del p_color ya existe.");
+            throw new ConflictException("El nombre del color ya existe.");
         }
     }
 
     public void validateBeforeUpdate(Integer id, ProductColorRequestDTO productColorRequestDTO) {
         // Validar el nombre
         if(productColorRequestDTO.getName() == null || productColorRequestDTO.getName().isBlank()) {
-            throw new BadRequestException("El nombre del p_color no puede estar vacío.");
+            throw new BadRequestException("El nombre del color no puede estar vacío.");
         }
 
-        // Verifica si existe otro p_color con el mismo nombre
+        // Verifica si existe otro color con el mismo nombre
         productColorRepository.findByNameIgnoreCase(productColorRequestDTO.getName())
                 .ifPresent(existingColor -> {
                     if(!existingColor.getId().equals(id)) {
-                        throw new ConflictException("El nombre del p_color ya existe.");
+                        throw new ConflictException("El nombre del color ya existe.");
                     }
                 });
     }

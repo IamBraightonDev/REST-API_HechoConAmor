@@ -28,7 +28,7 @@ public class ProductColorServiceImpl implements ProductColorService {
         this.modelMapper = modelMapper;
     }
 
-    // ********** Registrar un nuevo p_color en el sistema ********** //
+    // ********** Registrar un nuevo color en el sistema ********** //
     @Override
     public ProductColorResponseDTO registerColor(ProductColorRequestDTO productColorRequestDTO) {
         // Validar el nombre antes de registrar
@@ -38,7 +38,7 @@ public class ProductColorServiceImpl implements ProductColorService {
         ProductColor newProductColor = modelMapper.map(productColorRequestDTO, ProductColor.class);
         newProductColor.setId(null); // Forzar que Hibernate lo trate como un nuevo registro
 
-        // Guardar el nuevo p_color en la base de datos
+        // Guardar el nuevo color en la base de datos
         ProductColor savedProductColor = productColorRepository.save(newProductColor);
 
         // Convertir la entidad a DTO
@@ -54,7 +54,7 @@ public class ProductColorServiceImpl implements ProductColorService {
                 .collect(Collectors.toList());
     }
 
-    // ********** Buscar p_color por ID ********** //
+    // ********** Buscar color por ID ********** //
     @Override
     public ProductColorResponseDTO findById(Integer id) {
         ProductColor productColor = productColorRepository.findById(id)
@@ -63,7 +63,7 @@ public class ProductColorServiceImpl implements ProductColorService {
         return modelMapper.map(productColor, ProductColorResponseDTO.class);
     }
 
-    // ********** Buscar p_color por nombre ********** //
+    // ********** Buscar color por nombre ********** //
     @Override
     public ProductColorResponseDTO findByName(String name) {
         ProductColor productColor = productColorRepository.findByNameIgnoreCase(name)
@@ -72,7 +72,7 @@ public class ProductColorServiceImpl implements ProductColorService {
         return modelMapper.map(productColor, ProductColorResponseDTO.class);
     }
 
-    // ********** Actualizar el nombre de un p_color existente ********** //
+    // ********** Actualizar el nombre de un color existente ********** //
     @Override
     public ProductColorResponseDTO updateColor(Integer id, ProductColorRequestDTO productColorRequestDTO) {
         // Validar datos antes de actualziar
@@ -88,17 +88,18 @@ public class ProductColorServiceImpl implements ProductColorService {
         // Guardar cambios en la base de datos
         ProductColor updatedProductColor = productColorRepository.save(existingProductColor);
 
-        // Retornar el p_color actualizado en forma de DTO
+        // Retornar el color actualizado en forma de DTO
         return modelMapper.map(updatedProductColor, ProductColorResponseDTO.class);
     }
 
+    // ********** Eliminar un material existente ********** //
     @Override
     public void deleteColor(Integer id) {
-        // Buscar el p_color por su ID
+        // Buscar el color por su ID
         ProductColor productColor = productColorRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Color con ID: " + id + " no encontrado"));
 
-        // Eliminar p_color de la base de datos
+        // Eliminar polor de la base de datos
         productColorRepository.delete(productColor);
     }
 }
