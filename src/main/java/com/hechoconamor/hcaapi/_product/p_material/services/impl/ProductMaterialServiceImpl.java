@@ -86,6 +86,7 @@ public class ProductMaterialServiceImpl implements ProductMaterialService {
         // Guardar en la base de datos
         ProductMaterial updatedMaterial = productMaterialRepository.save(existingMaterial);
 
+        // Convertir entidad a DTO para retornarlo
         return modelMapper.map(updatedMaterial, ProductMaterialResponseDTO.class);
     }
 

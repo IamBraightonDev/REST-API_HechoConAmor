@@ -1,4 +1,4 @@
-package com.hechoconamor.hcaapi._product.p_material.dtos;
+package com.hechoconamor.hcaapi._product.p_size.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductMaterialRequestDTO {
+public class ProductSizeRequestDTO {
 
-    @NotBlank(message = "El nombre no puede estar vacío.")
-    @Size(max = 100, message = "El nombre no puede superar los 50 caracteres.")
+    @NotBlank(message = "El nombre del tamaño no puede estar vacío.")
+    @Size(max = 50, message = "El nombre del tamaño no puede superar los 50 caracteres")
     private String name;
 
 }
