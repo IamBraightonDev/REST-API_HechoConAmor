@@ -89,6 +89,7 @@ public class ProductSizeServiceImpl implements ProductSizeService {
         // Convertir entidad a DTO para retornarlo
         return modelMapper.map(updatedSize, ProductSizeResponseDTO.class);
     }
+
     // ********** Eliminar un material existente ********** //
     @Override
     public void deleteSize(Integer id) {
