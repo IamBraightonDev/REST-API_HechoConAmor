@@ -83,6 +83,12 @@
             <version>2.7.0</version>
         </dependency>
 
+        <!-- Envers - Auditoría -->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-envers</artifactId>
+        </dependency>
+
         <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
