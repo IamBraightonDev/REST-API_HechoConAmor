@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/supply/categories")
+@RequestMapping("/api/v1/supplies/categories")
 public class SupplyCategoryController {
 
     private final SupplyCategoryService categoryService;
