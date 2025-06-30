@@ -20,14 +20,18 @@ public class ProductController {
         this.productService = productService;
     }
 
+
+    // ************************ Create - CRUD ************************ //
     @PostMapping
     public ResponseEntity<ProductResponseDTO> registerProduct(@Valid @RequestBody ProductRequestDTO requestDTO) {
         ProductResponseDTO newProduct = productService.registerProduct(requestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newProduct); // 201 Created
     }
 
+
+    // ************************ Read - CRUD ************************ //
     @GetMapping
-    public ResponseEntity<List<ProductResponseDTO>> findAll() {
+    public ResponseEntity<List<ProductResponseDTO>> findAllProducts() {
         return ResponseEntity.ok(productService.findAll()); // 200 OK
     }
 
@@ -46,12 +50,16 @@ public class ProductController {
         return ResponseEntity.ok(productService.findByName(name)); // 200 OK
     }
 
+
+    // ************************ Update - CRUD ************************ //
     @PutMapping("/{id}")
     public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable Integer id,
                                                             @Valid @RequestBody ProductRequestDTO requestDTO) {
         return ResponseEntity.ok(productService.updateProduct(id, requestDTO)); // 200 OK
     }
 
+
+    // ************************ Delete - CRUD ************************ //
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Integer id) {
         productService.delete(id);

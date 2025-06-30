@@ -22,6 +22,6 @@ public class InventoryMovementRequestDTO {
     @NotNull(message = "El ID del producto es obligatorio")
     private Integer productId;
 
-    private String reason; // opcional
+    private String reason; // Opcional
 
 }

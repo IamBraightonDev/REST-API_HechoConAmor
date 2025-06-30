@@ -39,13 +39,9 @@ public class InventoryMovementServiceImpl implements InventoryMovementService {
         Product product = productRepository.findById(requestDTO.getProductId())
                 .orElseThrow(() -> new NoSuchElementException("Producto con ID: " + requestDTO.getProductId() + " no encontrado."));
 
-        // Crear entidad
+        // Crear movimiento con cantidad positiva
         InventoryMovement movement = new InventoryMovement();
-        movement.setQuantity(
-                requestDTO.getType() == MovementType.INGRESO || requestDTO.getType() == MovementType.DEVOLUCION
-                        ? requestDTO.getQuantity()
-                        : -requestDTO.getQuantity()
-        );
+        movement.setQuantity(requestDTO.getQuantity());
         movement.setType(requestDTO.getType());
         movement.setProduct(product);
         movement.setDate(LocalDateTime.now());

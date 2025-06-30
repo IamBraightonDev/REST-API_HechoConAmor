@@ -23,7 +23,7 @@ public class InventoryMovementValidator {
     }
 
     public void validateBeforeRegister(InventoryMovementRequestDTO requestDTO) {
-        // Validación básica redundante (refuerzo)
+        // Validaciones básicas
         if (requestDTO.getQuantity() == null || requestDTO.getQuantity() <= 0) {
             throw new BadRequestException("La cantidad debe ser mayor que 0.");
         }
@@ -36,13 +36,16 @@ public class InventoryMovementValidator {
         Product product = productRepository.findById(requestDTO.getProductId())
                 .orElseThrow(() -> new NoSuchElementException("Producto con ID " + requestDTO.getProductId() + " no encontrado."));
 
-        // Validación especial: evitar salidas de stock superiores al disponible
-        if (requestDTO.getType() == MovementType.SALIDA || requestDTO.getType() == MovementType.VENTA || requestDTO.getType() == MovementType.AJUSTE) {
-            Integer currentStock = movementRepository.findStockByProductId(product.getId());
-
-            if (requestDTO.getQuantity() > currentStock) {
-                throw new BadRequestException("La cantidad solicitada excede el stock disponible (" + currentStock + ").");
+        // Tipos que restan stock: validamos contra el stock disponible
+        switch (requestDTO.getType()) {
+            case SALIDA, VENTA, AJUSTE -> {
+                Integer currentStock = movementRepository.findStockByProductId(product.getId());
+                if (requestDTO.getQuantity() > currentStock) {
+                    throw new BadRequestException("La cantidad solicitada excede el stock disponible (" + currentStock + ").");
+                }
             }
+            // Los demás tipos no requieren validación contra stock
+            case INGRESO, DEVOLUCION -> {}
         }
     }
 }
