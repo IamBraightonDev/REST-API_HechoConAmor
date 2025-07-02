@@ -4,6 +4,7 @@ import com.hechoconamor.hcaapi.common.MovementType;
 import com.hechoconamor.hcaapi.products.product.entity.Product;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Audited
 @Entity
 @Table(name = "inventory_movements")
