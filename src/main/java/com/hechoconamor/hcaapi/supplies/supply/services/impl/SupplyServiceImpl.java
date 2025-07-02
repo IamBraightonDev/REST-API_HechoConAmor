@@ -10,7 +10,7 @@ import com.hechoconamor.hcaapi.supplies.supply.mapper.SupplyMapper;
 import com.hechoconamor.hcaapi.supplies.supply.repository.SupplyRepository;
 import com.hechoconamor.hcaapi.supplies.supply.services.SupplyService;
 import com.hechoconamor.hcaapi.supplies.supply.validator.SupplyValidator;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

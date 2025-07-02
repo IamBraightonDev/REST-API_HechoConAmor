@@ -3,14 +3,13 @@ package com.hechoconamor.hcaapi.products.inventory_movement.service.impl;
 import com.hechoconamor.hcaapi.products.inventory_movement.dtos.InventoryMovementRequestDTO;
 import com.hechoconamor.hcaapi.products.inventory_movement.dtos.InventoryMovementResponseDTO;
 import com.hechoconamor.hcaapi.products.inventory_movement.entity.InventoryMovement;
-import com.hechoconamor.hcaapi.products.inventory_movement.enums.MovementType;
 import com.hechoconamor.hcaapi.products.inventory_movement.mapper.InventoryMovementMapper;
 import com.hechoconamor.hcaapi.products.inventory_movement.repository.InventoryMovementRepository;
 import com.hechoconamor.hcaapi.products.inventory_movement.service.InventoryMovementService;
 import com.hechoconamor.hcaapi.products.inventory_movement.validator.InventoryMovementValidator;
 import com.hechoconamor.hcaapi.products.product.entity.Product;
 import com.hechoconamor.hcaapi.products.product.repository.ProductRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

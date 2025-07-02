@@ -1,6 +1,6 @@
 package com.hechoconamor.hcaapi.supplies.s_movement.dtos;
 
-import com.hechoconamor.hcaapi.supplies.s_movement.enums.MovementType;
+import com.hechoconamor.hcaapi.common.MovementType;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

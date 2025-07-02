@@ -1,6 +1,6 @@
 package com.hechoconamor.hcaapi.supplies.s_movement.dtos;
 
-import com.hechoconamor.hcaapi.supplies.s_movement.enums.MovementType;
+import com.hechoconamor.hcaapi.common.MovementType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,8 +1,8 @@
 package com.hechoconamor.hcaapi.supplies.s_movement.validator;
 
+import com.hechoconamor.hcaapi.common.MovementType;
 import com.hechoconamor.hcaapi.shared.exceptions.BadRequestException;
 import com.hechoconamor.hcaapi.supplies.s_movement.dtos.SupplyMovementRequestDTO;
-import com.hechoconamor.hcaapi.supplies.s_movement.enums.MovementType;
 import com.hechoconamor.hcaapi.supplies.s_movement.repository.SupplyMovementRepository;
 import com.hechoconamor.hcaapi.supplies.supply.entity.Supply;
 import com.hechoconamor.hcaapi.supplies.supply.repository.SupplyRepository;

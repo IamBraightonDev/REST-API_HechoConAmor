@@ -8,7 +8,7 @@ import com.hechoconamor.hcaapi.auth.u_user.entity.User;
 import com.hechoconamor.hcaapi.auth.u_user.repositoy.UserRepository;
 import com.hechoconamor.hcaapi.auth.u_user.services.UserService;
 import com.hechoconamor.hcaapi.auth.u_user.validator.UserValidator;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 

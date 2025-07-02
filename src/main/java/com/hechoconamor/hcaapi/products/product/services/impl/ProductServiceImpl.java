@@ -13,7 +13,7 @@ import com.hechoconamor.hcaapi.products.product.services.ProductService;
 import com.hechoconamor.hcaapi.products.product.validator.ProductValidator;
 import com.hechoconamor.hcaapi.products.p_size.repository.ProductSizeRepository;
 import com.hechoconamor.hcaapi.products.p_status.repository.ProductStatusRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

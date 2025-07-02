@@ -1,6 +1,6 @@
 package com.hechoconamor.hcaapi.products.inventory_movement.entity;
 
-import com.hechoconamor.hcaapi.products.inventory_movement.enums.MovementType;
+import com.hechoconamor.hcaapi.common.MovementType;
 import com.hechoconamor.hcaapi.products.product.entity.Product;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

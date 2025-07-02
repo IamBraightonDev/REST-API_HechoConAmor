@@ -9,7 +9,7 @@ import com.hechoconamor.hcaapi.supplies.s_movement.services.SupplyMovementServic
 import com.hechoconamor.hcaapi.supplies.s_movement.validator.SupplyMovementValidator;
 import com.hechoconamor.hcaapi.supplies.supply.entity.Supply;
 import com.hechoconamor.hcaapi.supplies.supply.repository.SupplyRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

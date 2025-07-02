@@ -10,10 +10,8 @@ public interface InventoryMovementRepository extends JpaRepository<InventoryMove
     @Query("""
         SELECT COALESCE(SUM(
             CASE
-                WHEN m.type = 'INGRESO' THEN m.quantity
-                WHEN m.type = 'DEVOLUCION' THEN m.quantity
-                WHEN m.type = 'AJUSTE' THEN m.quantity
-                WHEN m.type = 'SALIDA' THEN -m.quantity
+                WHEN m.type IN ('INGRESO', 'DEVOLUCION', 'PRODUCCION', 'AJUSTE_POSITIVO') THEN m.quantity
+                WHEN m.type IN ('SALIDA', 'VENTA', 'AJUSTE_NEGATIVO') THEN -m.quantity
                 ELSE 0
             END
         ), 0)

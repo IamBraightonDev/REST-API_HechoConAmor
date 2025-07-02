@@ -1,7 +1,7 @@
 package com.hechoconamor.hcaapi.products.inventory_movement.validator;
 
+
 import com.hechoconamor.hcaapi.products.inventory_movement.dtos.InventoryMovementRequestDTO;
-import com.hechoconamor.hcaapi.products.inventory_movement.enums.MovementType;
 import com.hechoconamor.hcaapi.products.inventory_movement.repository.InventoryMovementRepository;
 import com.hechoconamor.hcaapi.products.product.entity.Product;
 import com.hechoconamor.hcaapi.products.product.repository.ProductRepository;
@@ -36,16 +36,22 @@ public class InventoryMovementValidator {
         Product product = productRepository.findById(requestDTO.getProductId())
                 .orElseThrow(() -> new NoSuchElementException("Producto con ID " + requestDTO.getProductId() + " no encontrado."));
 
-        // Tipos que restan stock: validamos contra el stock disponible
         switch (requestDTO.getType()) {
-            case SALIDA, VENTA, AJUSTE -> {
+            // Tipos que RESTAN stock → validar contra stock disponible
+            case SALIDA, VENTA, AJUSTE_NEGATIVO -> {
                 Integer currentStock = movementRepository.findStockByProductId(product.getId());
                 if (requestDTO.getQuantity() > currentStock) {
                     throw new BadRequestException("La cantidad solicitada excede el stock disponible (" + currentStock + ").");
                 }
             }
-            // Los demás tipos no requieren validación contra stock
-            case INGRESO, DEVOLUCION -> {}
+
+            // Tipos que SUMAN stock → no necesitan validación de stock disponible
+            case INGRESO, DEVOLUCION, PRODUCCION, AJUSTE_POSITIVO -> {
+                // No se requiere validación de stock
+            }
+
+            // Por si el enum crece en el futuro
+            default -> throw new BadRequestException("Tipo de movimiento no reconocido: " + requestDTO.getType());
         }
     }
 }

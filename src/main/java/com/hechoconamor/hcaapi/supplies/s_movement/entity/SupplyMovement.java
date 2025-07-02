@@ -1,6 +1,6 @@
 package com.hechoconamor.hcaapi.supplies.s_movement.entity;
 
-import com.hechoconamor.hcaapi.supplies.s_movement.enums.MovementType;
+import com.hechoconamor.hcaapi.common.MovementType;
 import com.hechoconamor.hcaapi.supplies.supply.entity.Supply;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,7 +26,7 @@ public class SupplyMovement {
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "movement_type", nullable = false, length = 50)
     private MovementType movementType;
 
