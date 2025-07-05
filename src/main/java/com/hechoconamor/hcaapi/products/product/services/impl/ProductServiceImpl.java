@@ -50,6 +50,9 @@ public class ProductServiceImpl implements ProductService {
         product.setPrice(requestDTO.getPrice());
         product.setId(null);
 
+        // Asignar stock inicial en 0 (muy importante para evitar error 500)
+        product.setStock(0);
+
         // Seteamos relaciones manualmente
         product.setCategory(categoryRepository.findById(requestDTO.getCategoryId())
                 .orElseThrow(() -> new NoSuchElementException("Categoría no encontrada")));
