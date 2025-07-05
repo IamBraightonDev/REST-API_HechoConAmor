@@ -14,7 +14,7 @@ public interface OrderService {
 
     List<OrderResponseDTO> getAll();
 
-    void updateStatus(Integer id, OrderStatus nuevoEstado);
+    OrderResponseDTO updateStatus(Integer id, OrderStatus newStatus);
 
     void delete(Integer id);
 }

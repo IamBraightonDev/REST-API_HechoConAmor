@@ -22,7 +22,7 @@ public class ProductionDetailController {
 
 
     // ************************ Read - CRUD ************************ //
-    @GetMapping("/production/{productionId}")
+    @GetMapping("/{productionId}")
     public ResponseEntity<List<ProductionDetailResponseDTO>> findByProductionId(@PathVariable Integer productionId) {
         List<ProductionDetailResponseDTO> details = productionDetailService.findByProductionId(productionId);
         return ResponseEntity.ok(details);

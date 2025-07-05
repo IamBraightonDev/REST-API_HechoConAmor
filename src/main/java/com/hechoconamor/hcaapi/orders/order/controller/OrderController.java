@@ -34,11 +34,11 @@ public class OrderController {
         return ResponseEntity.ok(orderService.getAll());
     }
 
-    @PutMapping("/{id}/estado")
-    public ResponseEntity<Void> updateEstado(@PathVariable Integer id,
-                                             @RequestParam OrderStatus estado) {
-        orderService.updateStatus(id, estado);
-        return ResponseEntity.noContent().build();
+    @PutMapping("/{id}/status")
+    public ResponseEntity<OrderResponseDTO> updateStatus(@PathVariable Integer id,
+                                             @RequestParam OrderStatus status) {
+        OrderResponseDTO updatedStatus = orderService.updateStatus(id, status);
+        return ResponseEntity.ok(updatedStatus);
     }
 
     @DeleteMapping("/{id}")

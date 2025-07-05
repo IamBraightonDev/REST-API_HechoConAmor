@@ -37,27 +37,27 @@ public class OrderServiceImpl implements OrderService {
         Client client = orderValidator.validateClientExists(dto.getClientId());
 
         // 2. Validar y construir detalles
-        List<OrderDetail> detalles = orderDetailService.buildValidatedDetails(dto.getDetalles());
+        List<OrderDetail> details = orderDetailService.buildValidatedDetails(dto.getDetalles());
 
         // 3. Construir entidad Order
-        Order order = orderMapper.toEntity(client, detalles);
+        Order order = orderMapper.toEntity(client, details);
 
         // 4. Asignar order a cada detalle
-        detalles.forEach(d -> d.setOrder(order));
+        details.forEach(d -> d.setOrder(order));
 
         // 5. Guardar el pedido
         Order savedOrder = orderRepository.save(order);
 
         // 6. Generar movimientos de salida por producto
-        detalles.forEach(detalle -> {
-            InventoryMovement movimiento = InventoryMovement.builder()
+        details.forEach(detalle -> {
+            InventoryMovement movement = InventoryMovement.builder()
                     .product(detalle.getProduct())
                     .quantity(detalle.getCantidad())
                     .type(MovementType.SALIDA)
                     .reason("Pedido ID: " + savedOrder.getId())
                     .date(order.getFecha())
                     .build();
-            movementRepository.save(movimiento);
+            movementRepository.save(movement);
         });
 
         // 7. Devolver respuesta
@@ -79,11 +79,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void updateStatus(Integer id, OrderStatus nuevoEstado) {
+    public OrderResponseDTO updateStatus(Integer id, OrderStatus newStatus) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Pedido no encontrado"));
-        order.setEstado(nuevoEstado);
-        orderRepository.save(order);
+        order.setEstado(newStatus);
+        Order updatedOrder = orderRepository.save(order);
+        return orderMapper.toResponseDTO(updatedOrder);
     }
 
     @Override
