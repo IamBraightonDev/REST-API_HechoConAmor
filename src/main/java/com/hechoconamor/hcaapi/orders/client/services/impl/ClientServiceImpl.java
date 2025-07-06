@@ -24,7 +24,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientResponseDTO create(ClientRequestDTO dto) {
-        clientValidator.validateOnCreate(dto);
+        clientValidator.validateBeforeRegister(dto);
         Client client = clientMapper.toEntity(dto);
         return clientMapper.toResponseDTO(clientRepository.save(client));
     }
@@ -34,7 +34,7 @@ public class ClientServiceImpl implements ClientService {
         Client client = clientRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Cliente no encontrado"));
 
-        clientValidator.validateOnUpdate(id, dto);
+        clientValidator.validateBeforeUpdate(id, dto);
         clientMapper.updateEntity(client, dto);
         return clientMapper.toResponseDTO(clientRepository.save(client));
     }
