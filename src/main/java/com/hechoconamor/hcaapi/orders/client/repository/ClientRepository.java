@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface ClientRepository extends JpaRepository<Client, Integer> {
 
-    Optional<Client> findByNameIgnoreCase(String name);
+    Optional<Client> findByNameIgnoreCase(String nombre);
 
 }
