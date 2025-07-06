@@ -34,7 +34,7 @@ public class ClientServiceImpl implements ClientService {
         Client client = clientRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Cliente no encontrado"));
 
-        clientValidator.validateBeforeUpdate(id, dto);
+        clientValidator.validateBeforeUpdate(dto);
         clientMapper.updateEntity(client, dto);
         return clientMapper.toResponseDTO(clientRepository.save(client));
     }

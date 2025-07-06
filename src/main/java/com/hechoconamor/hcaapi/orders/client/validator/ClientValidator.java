@@ -19,7 +19,7 @@ public class ClientValidator {
         }
     }
 
-    public void validateBeforeUpdate(Integer id, ClientRequestDTO requestDTO) {
+    public void validateBeforeUpdate(ClientRequestDTO requestDTO) {
         // Validar nombre
         if (requestDTO.getNombre() == null || requestDTO.getNombre().isBlank()) {
             throw new BadRequestException("El nombre de usuario no puede estar vacío.");
