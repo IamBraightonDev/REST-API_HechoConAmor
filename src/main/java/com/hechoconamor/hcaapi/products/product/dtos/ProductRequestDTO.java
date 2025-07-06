@@ -23,6 +23,8 @@ public class ProductRequestDTO {
     @DecimalMin(value = "0.00", inclusive = false, message = "El precio debe ser mayor a 0.")
     private BigDecimal price;
 
+    private String imageUrl;
+
     @NotNull(message = "Debe seleccionar una categoría.")
     private Integer categoryId;
 

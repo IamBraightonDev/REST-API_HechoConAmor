@@ -48,6 +48,7 @@ public class ProductServiceImpl implements ProductService {
         product.setName(requestDTO.getName());
         product.setDescription(requestDTO.getDescription());
         product.setPrice(requestDTO.getPrice());
+        product.setImageUrl(requestDTO.getImageUrl());
         product.setId(null);
 
         // Asignar stock inicial en 0 (muy importante para evitar error 500)
@@ -149,6 +150,7 @@ public class ProductServiceImpl implements ProductService {
         existingProduct.setName(requestDTO.getName());
         existingProduct.setDescription(requestDTO.getDescription());
         existingProduct.setPrice(requestDTO.getPrice());
+        existingProduct.setImageUrl(requestDTO.getImageUrl());
 
         // Calcular el stock
         Integer stock = inventoryMovementRepository.findStockByProductId(id);

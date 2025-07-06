@@ -37,6 +37,9 @@ public class Product {
     @Column(name = "price", nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @Column(name = "stock", nullable = false)
     private Integer stock; // NO se llenará desde DTO, solo desde lógica
 
