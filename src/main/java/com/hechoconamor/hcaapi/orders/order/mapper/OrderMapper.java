@@ -41,6 +41,8 @@ public class OrderMapper {
                 .clientId(order.getClient().getId())
                 .clientNombre(order.getClient().getNombre())
                 .clientEmail(order.getClient().getEmail())
+                .clientTelefono(order.getClient().getTelefono())
+                .clientDireccion(order.getClient().getDireccion())
                 .estado(order.getEstado())
                 .detalles(detallesDTO)
                 .build();

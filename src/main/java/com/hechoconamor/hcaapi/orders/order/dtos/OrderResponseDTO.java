@@ -22,6 +22,8 @@ public class OrderResponseDTO {
     private Integer clientId;
     private String clientNombre;
     private String clientEmail;
+    private String clientTelefono;
+    private String clientDireccion;
 
     private OrderStatus estado;
 
