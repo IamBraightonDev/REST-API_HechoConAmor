@@ -1,6 +1,7 @@
 package com.hechoconamor.hcaapi.orders.order.mapper;
 
 import com.hechoconamor.hcaapi.orders.client.entity.Client;
+import com.hechoconamor.hcaapi.orders.order.dtos.OrderRequestDTO;
 import com.hechoconamor.hcaapi.orders.order.dtos.OrderResponseDTO;
 import com.hechoconamor.hcaapi.orders.order.entity.Order;
 import com.hechoconamor.hcaapi.orders.order.enums.OrderStatus;
@@ -21,9 +22,9 @@ public class OrderMapper {
         this.detailMapper = detailMapper;
     }
 
-    public Order toEntity(Client client, List<OrderDetail> detalles) {
+    public Order toEntity(OrderRequestDTO dto, Client client, List<OrderDetail> detalles) {
         return Order.builder()
-                .fecha(LocalDateTime.now())
+                .fecha(dto.getFecha())
                 .client(client)
                 .estado(OrderStatus.PENDIENTE)
                 .detalles(detalles)

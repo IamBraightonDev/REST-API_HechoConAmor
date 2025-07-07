@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
         List<OrderDetail> details = orderDetailService.buildValidatedDetails(dto.getDetalles());
 
         // 3. Construir entidad Order
-        Order order = orderMapper.toEntity(client, details);
+        Order order = orderMapper.toEntity(dto, client, details);
 
         // 4. Asignar order a cada detalle
         details.forEach(d -> d.setOrder(order));
