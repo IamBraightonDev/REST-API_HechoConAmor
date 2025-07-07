@@ -11,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/orders")
@@ -43,11 +45,24 @@ public class OrderController {
     }
 
     @PutMapping("/{id}/date")
-    public ResponseEntity<OrderResponseDTO> updateDate(@PathVariable Integer id,
-                                                       @RequestParam LocalDateTime date) {
-        OrderResponseDTO updatedDate = orderService.updateDate(id, date);
-        return ResponseEntity.ok(updatedDate);
+    public ResponseEntity<OrderResponseDTO> updateFechaEntrega(
+            @PathVariable Integer id,
+            @RequestBody Map<String, String> body) {
+        try {
+            if (!body.containsKey("fecha")) {
+                return ResponseEntity.badRequest().body(null);
+            }
+
+            LocalDateTime nuevaFecha = LocalDateTime.parse(body.get("fecha"));
+            OrderResponseDTO response = orderService.updateDate(id, nuevaFecha);
+            return ResponseEntity.ok(response);
+        } catch (DateTimeParseException e) {
+            return ResponseEntity.badRequest().body(null);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(null);
+        }
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {

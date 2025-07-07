@@ -93,8 +93,8 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Pedido no encontrado"));
         order.setFecha(newDate);
-        Order updatedOrder = orderRepository.save(order);
-        return orderMapper.toResponseDTO(updatedOrder);
+        Order updated = orderRepository.save(order);
+        return orderMapper.toResponseDTO(updated);
     }
 
     @Override
