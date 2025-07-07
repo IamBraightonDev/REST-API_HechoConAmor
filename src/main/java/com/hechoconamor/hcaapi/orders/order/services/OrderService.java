@@ -4,6 +4,7 @@ import com.hechoconamor.hcaapi.orders.order.dtos.OrderRequestDTO;
 import com.hechoconamor.hcaapi.orders.order.dtos.OrderResponseDTO;
 import com.hechoconamor.hcaapi.orders.order.enums.OrderStatus;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface OrderService {
@@ -15,6 +16,8 @@ public interface OrderService {
     List<OrderResponseDTO> getAll();
 
     OrderResponseDTO updateStatus(Integer id, OrderStatus newStatus);
+
+    OrderResponseDTO updateDate(Integer id, LocalDateTime newDate);
 
     void delete(Integer id);
 }

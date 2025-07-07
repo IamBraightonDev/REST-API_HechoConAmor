@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -22,4 +23,7 @@ public class OrderRequestDTO {
     @NotNull(message = "Debe haber al menos un producto en el pedido")
     @Size(min = 1, message = "El pedido debe tener al menos un detalle")
     private List<OrderDetailRequestDTO> detalles;
+
+    @NotNull(message = "La fecha de entrega es obligatoria")
+    private LocalDateTime fecha;
 }

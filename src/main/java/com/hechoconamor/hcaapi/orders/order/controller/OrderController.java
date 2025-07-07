@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -39,6 +40,13 @@ public class OrderController {
                                              @RequestParam OrderStatus status) {
         OrderResponseDTO updatedStatus = orderService.updateStatus(id, status);
         return ResponseEntity.ok(updatedStatus);
+    }
+
+    @PutMapping("/{id}/date")
+    public ResponseEntity<OrderResponseDTO> updateDate(@PathVariable Integer id,
+                                                       @RequestParam LocalDateTime date) {
+        OrderResponseDTO updatedDate = orderService.updateDate(id, date);
+        return ResponseEntity.ok(updatedDate);
     }
 
     @DeleteMapping("/{id}")

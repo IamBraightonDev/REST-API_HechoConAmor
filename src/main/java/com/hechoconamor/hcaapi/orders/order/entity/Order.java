@@ -24,7 +24,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // Fecha y hora del pedido
+    // Fecha y hora de entrega de pedido
     @Column(nullable = false)
     private LocalDateTime fecha;
 

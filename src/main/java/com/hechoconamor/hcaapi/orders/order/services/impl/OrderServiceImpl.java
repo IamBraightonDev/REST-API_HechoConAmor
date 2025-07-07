@@ -17,6 +17,7 @@ import com.hechoconamor.hcaapi.products.inventory_movement.repository.InventoryM
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -83,6 +84,15 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Pedido no encontrado"));
         order.setEstado(newStatus);
+        Order updatedOrder = orderRepository.save(order);
+        return orderMapper.toResponseDTO(updatedOrder);
+    }
+
+    @Override
+    public OrderResponseDTO updateDate(Integer id, LocalDateTime newDate) {
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Pedido no encontrado"));
+        order.setFecha(newDate);
         Order updatedOrder = orderRepository.save(order);
         return orderMapper.toResponseDTO(updatedOrder);
     }

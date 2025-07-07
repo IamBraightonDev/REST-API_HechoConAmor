@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OrderDetailRequestDTO {
+public class    OrderDetailRequestDTO {
 
     @NotNull(message = "El ID del producto es obligatorio")
     private Integer productId;
